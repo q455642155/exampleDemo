@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>百度搜索</title>
+    <style type="text/css">
+        *{padding:0;margin:0;}
+        #box{width:400px;position:absolute;left:50%;margin-left:-200px;top:200px;}
+        #text{width:340px;height:30px;}
+        #btn{width:50px;height:32px;line-height:32px;text-align:center;}
+    </style>
+</head>
+
+<body>
+    <div id="box">
+        <input type="text" id="text">
+        <input type="button" value="搜索" id="btn">
+    </div>
+
+    <script type="text/javascript">
+        function getId(id){
+            return document.getElementById(id)
+        }
+        var words=["我是第一个上月球的人","小小少年","小子不错啊","小子，你可以去上学了","你可以去请求了","英雄联盟","王者荣耀"];
+        // getId("text").onkeyup=function(){
+        //     if(getId("dv")){
+        //         getId("box").removeChild(getId("dv"))
+        //     }
+        //     var value=this.value;
+        //     var newArr=[];      
+        //     for(var i=0;i<words.length;i++){
+        //         if(words[i].indexOf(value)==0){
+        //             newArr.push(words[i])
+        //         }
+        //     }
+        //     if(this.value.length==0 || newArr.length==0){
+        //         if(getId("dv")){
+        //             getId("box").removeChild(getId("dv"))
+        //         }
+        //         return
+        //     }
+        //     var divobj=document.createElement("div");
+        //     getId("box").appendChild(divobj);
+        //     divobj.id="dv";
+        //     divobj.style.width=340+'px';
+        //     divobj.style.border='1px solid #f00';
+        //     divobj.style.borderTop="none";
+        //     // 输入值把值加入到div中
+        //     for(var j=0;j<newArr.length;j++){
+        //         var pobj=document.createElement("p");
+        //         divobj.appendChild(pobj);
+        //         pobj.innerHTML=newArr[j];
+        //         pobj.style.lineHeight=30+'px';
+        //         pobj.style.cursor='pointer';
+        //         // 鼠标放上去显示背景颜色
+        //         for(var k=0;k<divobj.children.length;k++){
+        //             divobj.children[k].addEventListener("mouseover",function(){
+        //                 this.style.backgroundColor='yellow'
+        //             })
+        //             divobj.children[k].addEventListener("mouseout",function(){
+        //                 this.style.backgroundColor=''
+        //             })
+        //             divobj.children[k].addEventListener("click",function(){
+        //                 getId("text").value=this.innerHTML;
+        //                 divobj.style.display='none'
+        //             })
+        //         }
+        //     }
+        // }
+
+        getId("text").onkeyup=function(){
+            if(getId("dv")){
+                getId("box").removeChild(getId("dv"))
+            }
+            var value=this.value;
+            var newArr=[];
+            for(var i=0;i<words.length;i++){
+                if(words[i].indexOf(value)== 0){
+                    newArr.push(words[i])
+                }
+            }
+            if(this.value.length==0 || newArr.length==0){
+                if(getId("dv")){
+                    getId("box").removeChild(getId("dv"));  
+                }
+                return
+            }
+            var divObj=document.createElement("div");
+            getId("box").appendChild(divObj)
+            divObj.id="dv";
+            divObj.style.width=340+'px';
+            divObj.style.border='1px solid #f00';
+            for(var i=0;i<newArr.length;i++){
+                var pObj=document.createElement("p");
+                divObj.appendChild(pObj);
+                pObj.innerHTML=newArr[i];
+                pObj.style.height=30+'px';
+                pObj.style.lineHeight=30+'px';
+            }
+        }
+    </script>
+</body>
+
+</html>

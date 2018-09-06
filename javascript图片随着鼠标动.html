@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>js图片随着鼠标动</title>
+    <style type="text/css">
+    *{padding:0;margin:0;}
+    #img{width:100px;height:100px;display:block;position:absolute;top:0;left:0;}
+    </style>
+</head>
+<body>
+    <img src="images/image1.png" alt="" id="img">
+    <script type="text/javascript">
+        function getId(id){
+            return document.getElementById(id);
+        }
+        document.onmousemove=function(e){
+            console.log(e.clientX)
+            getId("img").style.left=e.clientX+'px'
+            getId("img").style.top=e.clientY+'px'
+        }
+        document.onclick=function(){
+            document.onmousemove=null
+        }
+    </script>
+</body>
+
+</html>

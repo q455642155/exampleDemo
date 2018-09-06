@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>js筋斗云</title>
+    <style type="text/css">
+        *{padding:0;margin:0;}
+        .box{width:800px;margin:20px auto;position:relative;}
+        #cloud{width:100px;height:30px;background:#f00;position:absolute;top:0;left:0;}
+        #nav{position:relative;}
+        #nav li{list-style:none;float:left;height:30px;line-height:30px;width:100px;text-align:center;}
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <span id="cloud"></span>
+        <ul id="nav">
+            <li>菜单一</li>
+            <li>菜单二</li>
+            <li>菜单三</li>
+            <li>菜单四</li>
+            <li>菜单五</li>
+            <li>菜单六</li>
+            <li>菜单七</li>
+            <li>菜单八</li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        function getId(id){
+            return document.getElementById(id)
+        }
+        var cloud = getId("cloud");
+        var list= getId("nav").children;
+        for(var i=0;i<list.length;i++){
+            list[i].onmouseover=overhandle;
+            list[i].onmouseout=outhandle;
+            list[i].onclick=clickhandle
+        }
+        function overhandle(){
+            animate(cloud,this.offsetLeft)
+        }
+        var lastPosition = 0
+        function clickhandle(){
+            lastPosition = this.offsetLeft
+        }
+        function outhandle(){
+            animate(cloud,lastPosition)
+        }
+        // 封装动画函数
+        // 对象和目标  变速运动
+        function animate(ele,target){
+            clearInterval(ele.timeId)
+            ele.timeId=setInterval(function(){   
+                var current=ele.offsetLeft;
+                var step=(target-current)/10;
+                step=step>0?Math.ceil(step):Math.floor(step)
+                current+=step
+                ele.style.left=current+'px'
+                if(current==target){
+                    clearInterval(ele.timeId)   
+                }
+                
+            },30)
+        }
+
+    </script>
+</body>
+
+</html>

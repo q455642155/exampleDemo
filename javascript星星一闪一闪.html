@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>js摇一摇</title>
+    <style type="text/css">
+
+    div{width:600px;height:600px;position:relative;border:2px solid yellow;}
+    span{color:black;font-size:30px;position: absolute;}
+    </style>
+</head>
+
+<body>
+    <input type="button" value="开始摇一摇" id="start">
+    <div id="dv"></div>
+    <script type="text/javascript">
+        function getId(id){
+            return document.getElementById(id)
+        }
+        var timeId=null
+        getId("start").onclick=function(){
+            clearInterval(timeId)
+            timeId=setInterval(function(){
+                var x=parseInt(Math.random()*600+1);
+                var y=parseInt(Math.random()*600+1);
+                getId("dv").innerHTML='<span>★</span>';
+                getId("dv").firstElementChild.style.left=x+'px';
+                getId("dv").firstElementChild.style.top=y+'px';
+            },100)
+        };
+    </script>
+</body>
+
+</html>

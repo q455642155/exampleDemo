@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>title</title>
+    <style type="text/css">
+        *{padding:0;margin:0;}
+        .list{width:800px;margin:0 auto;display:flex;box-sizing:border-box;flex-wrap:wrap;}
+        .list li{list-style:none;width:100px;height:30px;border:1px solid #eee;margin:10px;line-height:30px;text-align:center;}
+        .list li.active{background:#f00;color:#fff;}
+        .start{width:100px;height:30px;margin:0 auto;}
+    </style>
+    <!--<script type="text/javascript" src="jquery.js"></script>-->
+    <script type="text/javascript">
+        //调用系统的构造函数
+        // var obj=new Object();
+        // obj.name="aaaad";
+        // obj.say=function(){
+        //     console.log(111);
+        // }
+        // obj.say();
+
+        //工厂函数
+        // function creatObj(name,age){
+        //     var obj=new Object();
+        //     obj.name=name;
+        //     obj.age=age;
+        //     obj.sayHello=function(){
+        //         console.log(this.name+this.age)
+        //     }
+        //     return obj;
+        // };
+        // var p=creatObj("西欧",20);
+        // console.log(p.name);
+        // p.sayHello()
+
+        //自定义构造函数
+        // function Person(name,age){
+        //     this.name=name;
+        //     this.age=age;
+        //     this.sayHi=function(){
+        //         console.log("我叫"+this.name+',我今年'+this.age+'岁了')
+        //     }
+        // };
+        // var per=new Person("小明",20);
+        // console.log(per.name)
+        // per.sayHi();
+
+        //字面量创建对象
+        // var person={
+        //     name:'小明',
+        //     age:20,
+        //     say:function(){
+        //         console.log("玩")
+        //     }
+        // };
+        // console.log(person.name);
+        // console.log(person.age);
+        // person.say();
+
+        //Math对象
+        //Math.ceil()向上取整
+        // console.log(Math.ceil(2.1));
+        // console.log(Math.ceil(2.4));
+        // console.log(Math.ceil(2.5));
+        // console.log(Math.ceil(2.9));
+        //Math.floor()向下取整
+        // console.log(Math.floor(2.1));
+        // console.log(Math.floor(2.4));
+        // console.log(Math.floor(2.5));
+        // console.log(Math.floor(2.9));
+        //Math.random()随机数
+        //console.log(Math.random())
+        //var arr=[1,2,3,4,5,6,7,8];
+        //console.log(parseInt(Math.random()*(arr.length-1)));
+        //console.log(arr[parseInt(Math.random()*arr.length)]);
+        //随机点名
+        // $(function(){
+        //     var index=$(".list li").length;
+        //     $(".start").click(function(){
+        //         clearInterval(time);
+        //         var time=setInterval(function(){
+        //             $(".list li").eq(parseInt(Math.random()*index)).addClass("active").siblings().removeClass("active")
+        //         },100);
+
+        //         setTimeout(function(){clearInterval(time)},3000)       
+        //     })
+        // })
+        
+        //值类型和引用类型
+        //值类型  Number,String,Boolean      值类型传递的是值
+        //引用类型 Object 引用类型传递的是地址
+        //内置对象   系统自身带的对象Math,Date,String
+        //1.解释性语言；2.脚本语言；3.弱类型语言；4.动态类型语言；5.基于对象的语言
+
+        //String.fromCharCode
+        // var str=65;
+        // console.log(String.fromCharCode(str))
+        //console.log(String.fromCharCode(65,66,67))
+
+        //charAt    
+        // var str="hello new world!";
+        // console.log(str.charAt(0));
+
+        //concat 字符串拼接
+        // var str="mike";
+        // console.log(str.concat(",have a good day!"))
+
+        //indexof
+        //查找字符串，如果不存在，则返回-1
+
+
+        // var add=(function(){
+        //     var count=0;
+        //     return function(){
+        //         var a=count+1;
+        //         console.log(a)
+        //     }
+        // })();
+        
+        //瀏覽器窗口的寬度和高度
+        // console.log(window.innerWidth);
+        // console.log(window.innerHeight)
+
+        //window.open()  //打開新窗口
+        //window.close() //關閉當前窗口
+        //window.moveTo() //移動當前窗口
+
+        //可用的屏幕寬度和高度
+        //document.write(screen.availWidth);
+        //document.write(screen.availHeight);
+
+        //返回web主機的域名
+        //console.log(location.hostname);
+        //返回當前頁面路勁和文件名
+        //console.log(location.pathname);
+        //location.assign()加載新的文檔
+        // function newdoc(){
+        //     window.location.assign("http://www.baidu.com")
+        // }
+
+        //navigator對象
+        //console.log(window.navigator)
+
+        //test()是一個正則表達式方法，用於檢測一個字符串是否匹配某個模式，如果匹配，則返回true，否則返回false
+
+        //\w+是去匹配是否為數字、字母、下劃線，帶加號是匹配多個字符
+        // var str='1234adb_$';
+        // var patt=/^\w+$/;
+        // console.log(patt.test(str)); 
+
+        //判斷是否全部為字母
+        // var str='asd';
+        // var patt=/^[a-zA-Z]+$/;
+        // console.log(patt.test(str))
+
+        //\d+判斷是否全部為數字
+        // var str="123456";
+        // var patt=/^\d+$/;
+        // console.log(patt.test(str))
+        // window.onload=function(){
+        //    // localStorage.setItem("name","cai");
+        //    //  document.getElementById("box").innerHTML=localStorage.getItem('name') ;
+        //    var obj={"name":"cai","age":14};
+        //    obj=JSON.stringify(obj);
+        //    //保存數據
+        //    localStorage.setItem("str",obj);
+        //    //讀取數據
+        //    localStorage.getItem("str");
+
+        //    document.getElementById("delete").onclick=function(){
+        //     //刪除數據
+        //     localStorage.removeItem("str")
+        //    }
+        // }
+
+        //把工資中超過2000的去除
+        // var arr=[1000,1200,1500,3000,2000,1800,1600,4000];
+        // var result=arr.filter(function(ele,index){
+        //     //console.log(ele+'==='+index)
+        //     return ele<=2000
+        // });
+        // console.log(result)
+
+        //查詢當前字符串出現過幾次
+        // var str='ahfiefhsalsfaweufhkslhklashdfkaddddlllzzzzzzzhj';
+        // var obj={};
+        // for(var i=0;i<str.length;i++){
+        //     var key=str[i];
+        //     if(obj[key]){
+        //         obj[key]++;
+        //     }else{
+        //         obj[key]=1;
+        //     }
+        // };
+        // for( key in obj){
+        //     console.log("當前字符串"+key+"出現了"+obj[key]+"次");
+        // }
+
+        //打印數組中所有a出現的位置
+        // var arr=[b,a,c,d,a,s,a,e,r,e,a];
+        // var result=arr.findIndex(function(ele){
+        //     return ele==a
+        // })
+        // cosnole.log(result)
+        //  var fileData = []; 
+        //  var blobObject = new Blob(fileData, {type: 'application/octet-stream'});
+        //  if(window.navigator && window.navigator.msSaveOrOpenBlob){
+        //     window.navigator.msSaveOrOpenBlob(blobObject, 'msSaveBlobOrOpenBlob_testFile.pdf'); 
+        // }else{
+        //     var link = document.createElement('a')
+        //       link.href = window.URL.createObjectURL(blobObject)
+        //       link.style.display = 'none'
+        //       link.download = 'msSaveBlobOrOpenBlob_testFile.pdf'
+        //       link.click()
+        //       window.URL.revokeObjectURL(link.href)
+        // }
+
+        // window.onload=function(){
+        //     document.getElementById("download").onclick=function(){
+        //         var content='http://10.134.158.84:8080/upload/regist/license/license09210827048265.png'
+        //         var blobObject = new Blob([content],{type:'application/png'})
+        //         var link = document.createElement('a')
+        //         link.href = window.URL.createObjectURL(blobObject)
+        //         link.style.display = 'none'
+        //         link.download = ''
+        //         link.click()
+        //         window.URL.revokeObjectURL(link.href)
+        //     }
+        // }
+        // function download(src) {
+        //     var $a = document.createElement('a');
+        //     $a.setAttribute("href", src);
+        //     $a.setAttribute("download", "");
+        //     var evObj = document.createEvent('MouseEvents');
+        //     evObj.initMouseEvent( 'click', true, true, window, 0, 0, 0, 0, 0, false, false, true, false, 0, null);
+        //     $a.dispatchEvent(evObj);
+        // };
+        // window.onload=function(){
+        //     document.getElementById("download").onclick=function(){
+        //         download('aaa.txt')
+        //     }
+        // }
+        // function download2() {
+        //     var $form = $('<form method="GET"></form>');
+        //     $form.attr('action', './aaa.txt');
+        //     $form.appendTo($('body'));
+        //     $form.submit();
+        // }
+        // function funDownload() {
+        //     if(window.navigator && window.navigator.msSaveOrOpenBlob){
+        //         var blob=new Blob(['http://10.134.158.84:8080/upload/regist/license/license09210827048265.png'])
+        //         navigator.msSaveBlob(blob, 'license09210827048265.png')
+        //     }else{
+        //         var link = document.createElement('a');
+        //         link.setAttribute("download", "license09210827048265.png");
+        //         link.href = 'http://10.134.158.84:8080/upload/regist/license/license09210827048265.png';
+        //         link.click();
+        //     }     
+        // };
+        // window.onload=function(){
+        //     document.getElementById("download").onclick=function(){
+        //         funDownload()
+        //     }
+        // }
+        // window.onload=function(){
+        //     document.getElementById("download").onclick=function(){
+        //         funDownload('安达市大所大所', 'aaa.txt')
+        //     }
+        // }
+
+        
+    </script>
+</head>
+
+<body>
+    <!-- <a id="download">下载</a> -->
+    <!-- <ul class="list">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+        <li>11</li>
+        <li>12</li>
+        <li>13</li>
+        <li>14</li>
+        <li>15</li>
+        <li>16</li>
+        <li>17</li>
+        <li>18</li>
+        <li>19</li>
+        <li>20</li>
+    </ul>-->
+    <!-- <button class="start" id="start" onclick="newdoc()">加載新文檔</button>  -->
+    <!-- <div id="box"></div>
+    <button id="delete">刪除</button> -->
+</body>
+
+</html>

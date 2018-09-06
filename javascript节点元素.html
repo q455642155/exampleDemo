@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>节点操作</title>
+    <style type="text/css">
+    </style>
+</head>
+
+<body>
+    <input type="button" value="添加" id="btn1">
+    <input type="button" value="删除" id="btn2">
+
+    <script type="text/javascript">
+        // 事件阶段： 1.事件捕获阶段，2.事件目标阶段，3.事件冒泡阶段
+        // 事件绑定addEventListerner(事件类型，事件处理函数，false) 第三个参数是用来控制是否属于事件捕获阶段还是事件冒泡阶段，如果是false,则是冒泡阶段；如果是true，则是捕获阶段
+        // addEventListerner  支持谷歌，火狐
+        // attachEvent 支持ie8
+        function getId(id){
+            return document.getElementById(id)
+        }
+        function f1(){
+            console.log("第一个")
+        }
+        function f2(){
+            console.log("第二个")
+        }
+        function addEventListener(ele,type,fn){
+            if(ele.addEventListener){
+                ele.addEventListener(type,fn,false)
+            }else if(ele.attachEvent){
+                ele.attachEvent("on"+type,fn)
+            }else {
+                ele["on"+type]=fn
+            }
+        }
+        function removeEventListener(ele,type,fnName){
+            if(ele.removeEventListener){
+                ele.removeEventListener(type,fnName,false)
+            }else if(ele.detachEvent){
+                ele.detachEvent("on"+type,fnName)
+            }else {
+                ele["on"+type]=fnName
+            }
+        }
+        addEventListener(getId("btn1"),"click",f1);
+        addEventListener(getId("btn1"),"click",f2);
+        removeEventListener(getId("btn2"),"click",f1);
+    </script>
+</body>
+
+</html>

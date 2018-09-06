@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>js固定导航条</title>
+    <style type="text/css">
+        *{padding:0;margin:0;}
+        .header{width:100%;height:100px;background:#f00;}
+        .nav{width:100%;height:40px;background:#00f;}
+        .content{width:100%;height:900px;}
+        .fixed{position:fixed;top:0;left:0;}
+    </style>
+</head>
+
+<body>
+    <div class="header" id="header">头部</div>
+    <div class="nav" id="nav">导航</div>
+    <div class="content" id="content">内容</div>
+    <script type="text/javascript">
+        function getId(id){
+            return document.getElementById(id)
+        }
+        var Height=getId("header").offsetHeight
+        window.onscroll=function(){
+            //console.log(document.documentElement.scrollTop)
+            var scrollHeight = document.documentElement.scrollTop || document.body.scrollTop
+            if(scrollHeight > Height){
+                console.log(1111)
+                getId("nav").className='nav fixed';
+                getId("content").style.marginTop=40+'px'
+            }else {
+                getId("nav").className='nav';
+                getId("content").style.marginTop=0
+            }
+        }
+    </script>
+</body>
+
+</html>

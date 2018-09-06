@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>js旋转木马</title>
+    <style type="text/css">
+        *{padding:0;margin:0;}
+        #box{width:1204px;height:400px;margin:100px auto;border:1px solid #f00;overflow:hidden;}
+        #box ul{width:1204px;}
+        #box ul li{list-style:none;float:left;width:240px;height:400px;border-right:1px solid #f00;}
+        #box ul li:last-child{border-right:none;}
+        #box ul li img{display:block;width:100%;height:100%;}
+    </style>
+</head>
+
+<body>
+    <div id="box">
+      <ul>
+        <li><img src="../images/1.jpg" alt="" /></li>
+        <li><img src="../images/2.jpg" alt="" /></li>
+        <li><img src="../images/3.jpg" alt="" /></li>
+        <li><img src="../images/4.jpg" alt="" /></li>
+        <li><img src="../images/5.jpg" alt="" /></li>
+      </ul>
+    </div>
+    <script type="text/javascript">
+        function getId(id){
+            return document.getElementById(id)
+        }
+        function getStyle(element,attr){
+            return window.getComputedStyle?window.getComputedStyle(element,null)[attr]:element.currentStyle[attr]
+        }
+        function animate(element,json,fn){
+            clearInterval(element.timeId);
+            element.timeId=setInterval(function(){
+                var flag = true
+                for(var attr in json){
+                    if(attr == "opacity"){
+                        var current = getStyle(element,attr)*100;
+                        var target = json[attr]*100;
+                        var step=(target-current)/10;
+                        step=step>0?Math.ceil(step):Math.floor(step);
+                        current+=step;
+                        element.style[attr]=current/100;
+                    } else if(attr=="zIndex"){
+                        element.style[attr]=json[attr]
+                    } else{
+                        var current=parseInt(getStyle(element,attr));
+                        var target = json[attr];
+                        var step=(target-current)/10;
+                        step=step>0?Math.ceil(step):Math.floor(step);
+                        current+=step;
+                        element.style[attr]=current+'px';
+                    }
+                    if(target!=current){
+                        flag=false
+                    }
+                }
+                if(flag){
+                    clearInterval(element.timeId)
+                    if(fn){
+                        fn()
+                    }
+                }
+            },20)
+        }
+        var lis = getId("box").getElementsByTagName("li");
+        for(var i=0;i<lis.length;i++){
+            lis[i].onmouseover=handleOver;
+            lis[i].onmouseout=handleOut;
+        }
+        function handleOver(){
+            for(var j=0;j<lis.length;j++){
+                animate(lis[j],{"width":100})
+            }
+            animate(this,{"width":800})
+        }
+        function handleOut(){
+            for(var j=0;j<lis.length;j++){
+                animate(lis[j],{"width":240})
+            }
+        }
+    </script>
+</body>
+
+</html>
