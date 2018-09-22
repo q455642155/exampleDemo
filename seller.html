@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,maximum-scale=1,minimum-scale=1,initial-scale=1,user-scalable=0">
+		<title>seller</title>
+		<script type="text/javascript" src="vue.js"></script>
+		<style type="text/css">
+			*{padding:0;margin:0;}
+			.header{width:100%;height:100px;background:#333;}
+			.content {width: 100%;display: flex;align-items: center;justify-content: center;flex-wrap: nowrap;position:absolute;bottom:46px;top:100px;}
+		    .left-content {top: 41px;width: 25%;height: 100%;background: #eee;overflow: auto;}
+		    .left-content ul {list-style: none;}
+		    .left-content ul li {padding: 15px 5px;text-align: center;}
+		    .right-content {width: 75%;height: 100%;overflow: auto;transition:all 1s;}
+	      	.right-content ul {list-style: none;}
+	        .right-content .class-title {padding: 7px 10px;background: #eee;}
+	        .item {overflow: hidden;width: 100%;padding: 10px;background: #fff;border-bottom: 1px solid #eee;}
+	        .item-left {float: left;}
+	        .item-img {width: 100px;height: 100px;background: #eee;}
+	        .item-right {float: left;padding: 0 10px;}
+	        .title {width: 100px;height: 20px;margin-top: 10px;background: #eee;}
+	        .subtitle {width: 70px;height: 20px;margin-top: 10px;background: #eee;}
+	        .price {width: 50px;height: 20px;margin-top: 10px;background: #eee;}
+	        .active {background: #fff;border-left: 2px solid #3190e8;}
+	        .footer{width:100%;height:46px;background:#000;position: fixed;left:0;bottom:0;}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<!--头部-->
+			<div class="header">
+				<div class="header-wrapper">
+				</div>
+			</div>
+			<!--列表-->
+			<div class="content">
+				<div class="left-content" ref="leftContent">
+					<ul>
+						<li v-for="(item,index) in menuList" :class="{'active': currentIndex===index}" :key="index" @click="select(index)">{{item.name}}</li>
+					</ul>
+				</div>
+				<div class="right-content" ref="rightContent">
+					<ul>
+                        <li class="{{item.class}}" v-for="(item,index) in menuContent">
+                            <div class="class-title ">{{item.name}}</div>
+                            <div v-for="(ite,index) in item.list" :key="index">
+                                <div class="item">
+                                    <div class="item-left">
+                                        <div class="item-img"></div>
+                                    </div>
+                                    <div class="item-right">
+                                        <div class="title">{{ite.title}}</div>
+                                        <div class="subtitle"></div>
+                                        <div class="price"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+				</div>
+			</div>
+			<div class="footer"></div>
+		</div>
+		<script type="text/javascript">
+			new Vue({
+				el:'#app',
+				data: {
+					listHeight:[], // 高度
+					scrollY:0, // 右侧内容滚动的高度
+					menuList:[
+						{
+							"name":'菜单一'
+						},
+						{
+							"name":'菜单二'
+						},
+						{
+							"name":'菜单三'
+						},
+						{
+							"name":'菜单四'
+						},
+						{
+							"name":'菜单五'
+						},
+						{
+							"name":'菜单六'
+						},
+
+						{
+							"name":'菜单七'
+						},
+						{
+							"name":'菜单八'
+						},
+						{
+							"name":'菜单九'
+						},
+						{
+							"name":'菜单十'
+						},
+						{
+							"name":'菜单十一'
+						},
+						{
+							"name":'菜单十二'
+						},
+						{
+							"name":'菜单十三'
+						}
+					],
+					menuContent:[
+						{name: '分类1', class: 'item1', list: [{title: '1'}, {title: '2'}, {title: '3'}, {title: '4'}, {title: '5'}]},
+				        {name: '分类2', class: 'item2', list: [{title: '1'}, {title: '2'}, {title: '3'}, {title: '4'}]},
+				        {
+				            name: '分类3',
+				            class: 'item3',
+				            list: [{title: '1'}, {title: '2'}, {title: '3'}, {title: '4'}, {title: '5'}, {title: '6'}]
+				        },
+				        {name: '分类4', class: 'item4', list: [{title: '1'}, {title: '2'}]},
+				        {name: '分类5', class: 'item5', list: [{title: '1'}, {title: '2'}]},
+				        {name: '分类6', class: 'item6', list: [{title: '1'}, {title: '2'}]},
+				        {name: '分类7', class: 'item7', list: [{title: '1'}]},
+				        {name: '分类8', class: 'item8', list: [{title: '1'}, {title: '2'}]},
+				        {name: '分类9', class: 'item8', list: [{title: '1'}, {title: '2'}]},
+				        {name: '分类10', class: 'item8', list: [{title: '1'}, {title: '2'}]},
+				        {name: '分类11', class: 'item8', list: [{title: '1'}, {title: '2'}]},
+				        {name: '分类12', class: 'item8', list: [{title: '1'}, {title: '2'}]},
+				        {name: '分类13', class: 'item8', list: [{title: '1'}, {title: '2'},{title: '2'},{title: '2'},{title: '2'},{title: '2'}]}
+					]
+				},
+				computed:{
+					// 计算左侧菜单显示的当前项
+					currentIndex(){
+						for(var i=0;i<this.listHeight.length;i++){
+							let height1=this.listHeight[i];
+							let height2=this.listHeight[i+1];
+							if(!height2 || (this.scrollY>=height1&&this.scrollY<height2)){
+								return i
+							}
+						}
+						return 0
+					}
+				},
+				mounted(){
+					this.left = this.$refs.leftContent;  // 获取元素
+					this.right = this.$refs.rightContent; // 获取元素
+					this.right.addEventListener('scroll',() => {  // 监听右侧滚动事件
+						//console.log(this.right.scrollTop)
+						this.scrollY=this.right.scrollTop
+					})
+					this.$nextTick(() => {
+						this.getHeight();
+					})
+				},
+				methods:{
+					// 获取右侧每一个li的高度
+					getHeight(){
+						var lis=this.right.getElementsByTagName("li");
+						let height=0;
+						this.listHeight.push(height);
+						for(var i=0;i<lis.length;i++){
+							let item = lis[i];
+							height+=item.clientHeight;
+							this.listHeight.push(height)
+						}
+					},
+					select(index){
+						this.$refs.rightContent.scrollTop = this.right.getElementsByTagName("li")[index].offsetTop;
+					}
+				}
+			})
+		</script>
+	</body>
+</html>
