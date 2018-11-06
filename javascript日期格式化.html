@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>日期格式化</title>
+    <style type="text/css">
+    </style>
+</head>
+
+<body>
+    <div id="box">
+    </div>
+    <script type="text/javascript">
+        // 日期格式转化
+        function formateDateChange(value) {
+            var date = new Date(value);//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+            if (value === undefined || value === null || value === '') {
+                return '- -'
+            }
+            var Y = date.getFullYear() + '-';
+            var M = (date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1) + '-';
+            var D = (date.getDate() < 10 ? '0' + (date.getDate()) : date.getDate());
+            return Y + M + D
+        }
+
+        // 空值处理
+        function nullDealWith(value) {
+            if (value === undefined || value === null || value === '' || value === 'null' || value === 'undefined') {
+                return '- -'
+            } 
+            return value  
+        }
+    </script>
+</body>
+
+</html>
