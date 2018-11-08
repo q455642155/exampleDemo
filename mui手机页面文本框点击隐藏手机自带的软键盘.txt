@@ -1,0 +1,4 @@
+
+
+	// 在点击事件方法里面添加这段代码
+      document.activeElement.blur(); 
