@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>element-ui 关于日期范围选择控件，如何限制只能选择30天</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+</head>
+<body>
+<div>
+    <div id="app">
+        <el-date-picker
+                v-model="dateRange"
+                :picker-options="pickerOptions"
+                type="daterange"
+                range-separator="至"
+                start-placeholder="开始日期"
+                end-placeholder="结束日期">
+        </el-date-picker>
+    </div>
+</div>
+</body>
+<!-- import Vue before Element -->
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<!-- import JavaScript -->
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+  new Vue({
+    el: '#app',
+    data: function() {
+      return {
+        pickerMinDate: '',
+        dateRange: [],
+        pickerOptions: {
+          onPick: ({ maxDate, minDate }) => {
+            this.pickerMinDate = minDate.getTime()
+            if (maxDate) {
+              this.pickerMinDate = ''
+            }
+          },
+          disabledDate: (time) => {
+            if (this.pickerMinDate !== '') {
+              const day30 = (30 - 1) * 24 * 3600 * 1000
+              let maxTime = this.pickerMinDate + day30
+              let minTime = this.pickerMinDate - day30
+              if (maxTime > new Date()) {
+                maxTime = new Date()
+              }
+              return time.getTime() > maxTime || time.getTime() < minTime
+            }
+            return time.getTime() > Date.now()
+          }
+        }
+      }
+    }
+  })
+</script>
+</html>
